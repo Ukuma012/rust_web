@@ -6,7 +6,12 @@ fn index() -> &'static str {
     "Hello World"
 }
 
+#[get("/id")]
+fn id() -> &'static str {
+    "id is 1"
+}
+
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index])
+    rocket::build().mount("/", routes![id])
 }
