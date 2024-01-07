@@ -6,9 +6,9 @@ fn index() -> &'static str {
     "Hello World"
 }
 
-#[get("/id")]
-fn id() -> &'static str {
-    "id is 1"
+#[get("/<id>")]
+fn id(id: usize) -> String {
+    format!("id: {}", id)
 }
 
 #[launch]
