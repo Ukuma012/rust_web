@@ -31,7 +31,7 @@ fn rocket() -> _ {
     }
 
     let config: Config = figment.extract().expect("config");
-    println!("Server started on port {}!", config.port);
+    println!("Server started on port {}", config.port);
 
     rocket
 }
