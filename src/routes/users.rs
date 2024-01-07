@@ -1,7 +1,7 @@
 use rocket::serde::json::{json, Json, Value};
 use serde::Deserialize;
 
-#[derive[Deserialize]]
+#[derive(Deserialize)]
 pub struct NewUser {
     user: NewUserData,
 }
