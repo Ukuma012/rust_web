@@ -13,5 +13,5 @@ fn id() -> &'static str {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![id])
+    rocket::build().mount("/", routes![index, id])
 }
