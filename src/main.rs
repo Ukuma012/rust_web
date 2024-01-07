@@ -1,3 +1,4 @@
+use rocket::serde::Deserialize;
 use rocket::{get, launch, routes};
 use rocket_dyn_templates::{context, Template};
 
@@ -18,7 +19,19 @@ fn id(id: usize) -> Template {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build()
+    let rocket = rocket::build()
         .mount("/", routes![index, id])
-        .attach(Template::fairing())
+        .attach(Template::fairing());
+
+    let figment = rocket.figment();
+    #[derive(Deserialize, Debug)]
+    #[serde(crate = "rocket::serde")]
+    struct Config {
+        port: u16,
+    }
+
+    let config: Config = figment.extract().expect("config");
+    println!("Server started on port {}!", config.port);
+
+    rocket
 }
