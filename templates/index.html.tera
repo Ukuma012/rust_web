@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Templating Engine</title>
+    </head>
+    <body>
+        id: {{ id }}
+    </body>
+</html>

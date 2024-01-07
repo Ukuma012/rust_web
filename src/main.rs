@@ -1,17 +1,24 @@
-#[macro_use]
-extern crate rocket;
+use rocket::{get, launch, routes};
+use rocket_dyn_templates::{context, Template};
 
 #[get("/")]
 fn index() -> &'static str {
     "Hello World"
 }
 
-#[get("/<id>")]
-fn id(id: usize) -> String {
-    format!("id: {}", id)
+#[get("/id/<id>")]
+fn id(id: usize) -> Template {
+    Template::render(
+        "index",
+        context! {
+            id: id,
+        },
+    )
 }
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index, id])
+    rocket::build()
+        .mount("/", routes![index, id])
+        .attach(Template::fairing())
 }
