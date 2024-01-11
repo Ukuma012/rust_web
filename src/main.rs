@@ -1,6 +1,6 @@
 use rocket::serde::Deserialize;
 use rocket::{get, launch, routes};
-use rocket_dyn_templates::{context, Template};
+use rocket_dyn_templates::Template;
 
 #[get("/")]
 fn index() -> &'static str {
