@@ -25,7 +25,7 @@ impl Errors {
 
 impl<'r> Responder<'r, 'static> for Errors {
     fn respond_to(self, req: &'r Request<'_>) -> response::Result<'static> {
-        use validator::ValidationErrorKind::Field;
+        use validator::ValidationErrorsKind::Field;
 
         let mut errors = json!({});
         for (field, field_errors) in self.errors.into_errors() {

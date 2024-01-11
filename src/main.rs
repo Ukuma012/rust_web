@@ -2,6 +2,9 @@ use rocket::serde::Deserialize;
 use rocket::{get, launch, routes};
 use rocket_dyn_templates::Template;
 
+mod errors;
+mod routes;
+
 #[get("/")]
 fn index() -> &'static str {
     "Hello World"
@@ -10,7 +13,7 @@ fn index() -> &'static str {
 #[launch]
 fn rocket() -> _ {
     let rocket = rocket::build()
-        .mount("/", routes![index])
+        .mount("/", routes![index, routes::users::post_users])
         .attach(Template::fairing());
 
     let figment = rocket.figment();

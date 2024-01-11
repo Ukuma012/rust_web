@@ -1,3 +1,4 @@
+use crate::errors::{Errors, FieldValidator};
 use rocket::serde::json::{json, Json, Value};
 use serde::Deserialize;
 
@@ -22,4 +23,8 @@ pub async fn post_users(new_user: Json<NewUser>) -> Result<Value, Errors> {
     let username = extracter.extract("username", new_user.username);
     let email = extracter.extract("email", new_user.email);
     let password = extracter.extract("username", new_user.password);
+
+    println!("Password: {:?}", password);
+
+    extracter.check()?;
 }
